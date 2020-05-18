@@ -795,6 +795,8 @@ public class Connection: CustomStringConvertible {
                 
             case let errorResponse as ErrorResponse:
                 log(.fine, "SQL error: \(errorResponse.notice)")
+                //updated
+                delegate?.connection(self, didReceiveNotice: errorResponse.notice)
                 throw PostgresError.sqlError(notice: errorResponse.notice)
                 
             case let noticeResponse as NoticeResponse:
